@@ -1,0 +1,1872 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:toggleSwitchControl="clr-namespace:Common.ToggleSwitchControl">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/src/ToggleSwitch/3rdParty/Generic.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <toggleSwitchControl:CornerRadiusValueConverter x:Key="CornerRadiusValueConverter" />
+    <toggleSwitchControl:ScalarValueConverter x:Key="ScalarConverter" />
+
+    <LinearGradientBrush x:Key="iPhoneThumbBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#FFD8D7D8" />
+        <GradientStop Offset="1" Color="#FFFDFCFD" />
+    </LinearGradientBrush>
+
+    <ControlTemplate x:Key="EngravedContentTemplate" TargetType="ContentControl">
+        <toggleSwitchControl:DropShadowTextBlock Margin="{TemplateBinding Padding}"
+                                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                 Cursor="{TemplateBinding Cursor}"
+                                                 DropShadowAngle="90"
+                                                 DropShadowColor="#FFF7F7F7"
+                                                 DropShadowDistance="1"
+                                                 DropShadowOpacity="0.3"
+                                                 Focusable="False"
+                                                 FontFamily="{TemplateBinding FontFamily}"
+                                                 FontSize="{TemplateBinding FontSize}"
+                                                 FontStyle="{TemplateBinding FontStyle}"
+                                                 FontWeight="{TemplateBinding FontWeight}"
+                                                 Foreground="{TemplateBinding Foreground}"
+                                                 IsTabStop="False"
+                                                 Text="{TemplateBinding Content}" />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="GroovedThumbTemplate" TargetType="Thumb">
+        <Grid Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="BackgroundAnimation"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.05" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="BackgroundAnimation"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.25" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="DisabledVisualElement"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To=".55" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="FocusStates">
+                    <VisualState x:Name="Focused">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="FocusVisualElement"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.05" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Unfocused" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="CheckStates">
+                    <VisualState x:Name="Unchecked" />
+                    <VisualState x:Name="Checked" />
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <toggleSwitchControl:OuterGlowBorder Background="Transparent"
+                                                 BorderThickness="0"
+                                                 CornerRadius="4"
+                                                 IsTabStop="False"
+                                                 OuterGlowColor="Black"
+                                                 OuterGlowOpacity="0.15"
+                                                 OuterGlowSize="4"
+                                                 ShadowCornerRadius="8">
+                <Grid>
+                    <toggleSwitchControl:ClippingBorder x:Name="Background"
+                                                        Background="White"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="4"
+                                                        IsTabStop="False">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="#FFEBEBEB"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3"
+                                Padding="6">
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Rectangle Width="1"
+                                           Fill="#7F969696"
+                                           StrokeThickness="0" />
+                                <Rectangle Width="1"
+                                           Margin="0,0,1,0"
+                                           Fill="#7FF8F8F8"
+                                           StrokeThickness="0" />
+                                <Rectangle Width="1"
+                                           Fill="#7F969696"
+                                           StrokeThickness="0" />
+                                <Rectangle Width="1"
+                                           Margin="0,0,1,0"
+                                           Fill="#7FF8F8F8"
+                                           StrokeThickness="0" />
+                                <Rectangle Width="1"
+                                           Fill="#7F969696"
+                                           StrokeThickness="0" />
+                                <Rectangle Width="1"
+                                           Fill="#7FF8F8F8"
+                                           StrokeThickness="0" />
+                            </StackPanel>
+                        </Border>
+                    </toggleSwitchControl:ClippingBorder>
+                    <toggleSwitchControl:ClippingBorder x:Name="BackgroundAnimation"
+                                                        Background="Black"
+                                                        BorderBrush="Black"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="4"
+                                                        IsTabStop="False"
+                                                        Opacity="0" />
+                    <Rectangle x:Name="DisabledVisualElement"
+                               Fill="White"
+                               IsHitTestVisible="false"
+                               Opacity="0"
+                               RadiusX="4"
+                               RadiusY="4" />
+                    <Rectangle x:Name="FocusVisualElement"
+                               Margin="1"
+                               IsHitTestVisible="false"
+                               Opacity="0"
+                               RadiusX="4"
+                               RadiusY="4"
+                               StrokeThickness="1" />
+                </Grid>
+            </toggleSwitchControl:OuterGlowBorder>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="iOS5ThumbTemplate" TargetType="Thumb">
+        <Grid Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="BackgroundAnimation"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.05" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="BackgroundAnimation"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.25" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="DisabledVisualElement"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To=".55" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="FocusStates">
+                    <VisualState x:Name="Focused">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="FocusVisualElement"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.05" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Unfocused" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="CheckStates">
+                    <VisualState x:Name="Unchecked" />
+                    <VisualState x:Name="Checked" />
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <toggleSwitchControl:OuterGlowBorder Background="Transparent"
+                                                 BorderThickness="0"
+                                                 CornerRadius="10"
+                                                 IsTabStop="False"
+                                                 OuterGlowColor="Black"
+                                                 OuterGlowOpacity="0.05"
+                                                 OuterGlowSize="1"
+                                                 ShadowCornerRadius="12">
+                <Grid>
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="11">
+                        <toggleSwitchControl:ClippingBorder x:Name="Background"
+                                                            Background="{TemplateBinding Background}"
+                                                            BorderBrush="#FFEBEBEB"
+                                                            BorderThickness="1"
+                                                            CornerRadius="12"
+                                                            IsTabStop="False" />
+                    </Border>
+                    <toggleSwitchControl:ClippingBorder x:Name="BackgroundAnimation"
+                                                        Background="Black"
+                                                        BorderBrush="Black"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="11"
+                                                        IsTabStop="False"
+                                                        Opacity="0" />
+                    <Rectangle x:Name="DisabledVisualElement"
+                               Fill="White"
+                               IsHitTestVisible="false"
+                               Opacity="0"
+                               RadiusX="11"
+                               RadiusY="11" />
+                    <Rectangle x:Name="FocusVisualElement"
+                               Margin="1"
+                               IsHitTestVisible="false"
+                               Opacity="0"
+                               RadiusX="9"
+                               RadiusY="9"
+                               StrokeThickness="1" />
+                </Grid>
+            </toggleSwitchControl:OuterGlowBorder>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="BrushedThumbTemplate" TargetType="Thumb">
+        <Grid Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="BackgroundAnimation"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.05" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="BackgroundAnimation"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.25" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="DisabledVisualElement"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To=".55" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="FocusStates">
+                    <VisualState x:Name="Focused">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="FocusVisualElement"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.05" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Unfocused" />
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Image Source="pack://application:,,,/resources/Knob.png" />
+            <toggleSwitchControl:ClippingBorder x:Name="BackgroundAnimation"
+                                                Background="Black"
+                                                BorderBrush="Black"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                CornerRadius="14"
+                                                Opacity="0" />
+            <Rectangle x:Name="DisabledVisualElement"
+                       IsHitTestVisible="false"
+                       Opacity="0"
+                       RadiusX="14"
+                       RadiusY="14" />
+            <Rectangle x:Name="FocusVisualElement"
+                       IsHitTestVisible="false"
+                       Opacity="0"
+                       RadiusX="14"
+                       RadiusY="14" />
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="SimpleThumbTemplate" TargetType="Thumb">
+        <Grid Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="BackgroundAnimation"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.05" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="BackgroundAnimation"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.25" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="DisabledVisualElement"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To=".55" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="FocusStates">
+                    <VisualState x:Name="Focused">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="FocusVisualElement"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.05" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Unfocused" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="CheckStates">
+                    <VisualState x:Name="Unchecked" />
+                    <VisualState x:Name="Checked" />
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <toggleSwitchControl:OuterGlowBorder Background="Transparent"
+                                                 BorderThickness="0"
+                                                 CornerRadius="4"
+                                                 IsTabStop="False"
+                                                 OuterGlowColor="Black"
+                                                 OuterGlowOpacity="0.15"
+                                                 OuterGlowSize="4"
+                                                 ShadowCornerRadius="8">
+                <Grid>
+                    <toggleSwitchControl:ClippingBorder x:Name="Background"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="4"
+                                                        IsTabStop="False" />
+                    <toggleSwitchControl:ClippingBorder x:Name="BackgroundAnimation"
+                                                        Background="Black"
+                                                        BorderBrush="Black"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="4"
+                                                        IsTabStop="False"
+                                                        Opacity="0" />
+                    <Rectangle x:Name="DisabledVisualElement"
+                               Fill="White"
+                               IsHitTestVisible="false"
+                               Opacity="0"
+                               RadiusX="4"
+                               RadiusY="4" />
+                    <Rectangle x:Name="FocusVisualElement"
+                               Margin="1"
+                               IsHitTestVisible="false"
+                               Opacity="0"
+                               RadiusX="4"
+                               RadiusY="4"
+                               StrokeThickness="1" />
+                </Grid>
+            </toggleSwitchControl:OuterGlowBorder>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="ThumbWithDoubleArrowTemplate" TargetType="Thumb">
+        <Grid Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="BackgroundAnimation"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.05" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="BackgroundAnimation"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.25" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="DisabledVisualElement"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To=".55" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="FocusStates">
+                    <VisualState x:Name="Focused">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="FocusVisualElement"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.05" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Unfocused" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="CheckStates">
+                    <VisualState x:Name="Unchecked" />
+                    <VisualState x:Name="Checked" />
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <toggleSwitchControl:OuterGlowBorder Background="Transparent"
+                                                 BorderThickness="0"
+                                                 CornerRadius="2"
+                                                 IsTabStop="False"
+                                                 OuterGlowColor="Black"
+                                                 OuterGlowOpacity="0.15"
+                                                 OuterGlowSize="4"
+                                                 ShadowCornerRadius="8">
+                <Grid>
+                    <toggleSwitchControl:ClippingBorder x:Name="Background"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="2"
+                                                        IsTabStop="False">
+                        <StackPanel Height="6"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <Path Margin="0,0,2,0"
+                                  Data="M0,0 L0,6 L-5,3"
+                                  Fill="{TemplateBinding Foreground}"
+                                  Stretch="Fill"
+                                  StrokeThickness="0" />
+                            <Path Margin="2,0,0,0"
+                                  Data="M0,0 L0,6 L5,3"
+                                  Fill="{TemplateBinding Foreground}"
+                                  Stretch="Fill"
+                                  StrokeThickness="0" />
+                        </StackPanel>
+                    </toggleSwitchControl:ClippingBorder>
+                    <toggleSwitchControl:ClippingBorder x:Name="BackgroundAnimation"
+                                                        Background="Black"
+                                                        BorderBrush="Black"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="2"
+                                                        IsTabStop="False"
+                                                        Opacity="0" />
+                    <Rectangle x:Name="DisabledVisualElement"
+                               Fill="White"
+                               IsHitTestVisible="false"
+                               Opacity="0"
+                               RadiusX="2"
+                               RadiusY="2" />
+                    <Rectangle x:Name="FocusVisualElement"
+                               Margin="1"
+                               IsHitTestVisible="false"
+                               Opacity="0"
+                               RadiusX="2"
+                               RadiusY="2"
+                               StrokeThickness="1" />
+                </Grid>
+            </toggleSwitchControl:OuterGlowBorder>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="RestartThumbTemplate" TargetType="Thumb">
+        <Grid Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="BackgroundAnimation"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.05" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="BackgroundAnimation"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.25" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="DisabledVisualElement"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To=".55" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="FocusStates">
+                    <VisualState x:Name="Focused">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="FocusVisualElement"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.05" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Unfocused" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="CheckStates">
+                    <VisualState x:Name="Unchecked" />
+                    <VisualState x:Name="Checked">
+                        <Storyboard RepeatBehavior="Forever">
+                            <DoubleAnimationUsingKeyFrames BeginTime="0"
+                                                           Storyboard.TargetName="LoadingGrid"
+                                                           Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)">
+                                <LinearDoubleKeyFrame KeyTime="0" Value="0" />
+                                <LinearDoubleKeyFrame KeyTime="00:00:01" Value="359" />
+                            </DoubleAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoadingGrid" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                <DiscreteObjectKeyFrame KeyTime="0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Visible</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                <DiscreteObjectKeyFrame KeyTime="0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <Visibility>Collapsed</Visibility>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <toggleSwitchControl:OuterGlowBorder Background="Transparent"
+                                                 BorderThickness="0"
+                                                 CornerRadius="4"
+                                                 IsTabStop="False"
+                                                 OuterGlowColor="Black"
+                                                 OuterGlowOpacity="0.15"
+                                                 OuterGlowSize="4"
+                                                 ShadowCornerRadius="8">
+                <Grid>
+                    <toggleSwitchControl:ClippingBorder x:Name="Background"
+                                                        Background="White"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="4"
+                                                        IsTabStop="False">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="#FFEBEBEB"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3">
+                            <Grid>
+                                <Path x:Name="path"
+                                      Margin="7,5"
+                                      Data="M3.6,2.6 L10,2.6 L10,6.6 L3.6,6.6 z M10,0 L15.5,4.6 L10,9.4 z"
+                                      Fill="#AA767676"
+                                      Stretch="Fill"
+                                      StrokeThickness="0" />
+                                <StackPanel x:Name="LoadingGrid"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            RenderTransformOrigin="0.5,0.5"
+                                            Visibility="Collapsed">
+                                    <StackPanel.RenderTransform>
+                                        <RotateTransform />
+                                    </StackPanel.RenderTransform>
+                                    <Path Width="18"
+                                          Height="9"
+                                          HorizontalAlignment="Center"
+                                          Data="F1 M 10,3 C 6,3 3,6 3,10 L 0,10 C 0,4.5 4.5,0 10,0 C 15.5,0 20,4.5 20,10 L 17,10 C 17,6 14,3 10,3 Z"
+                                          Stretch="Fill">
+                                        <Path.Fill>
+                                            <LinearGradientBrush MappingMode="Absolute" StartPoint="400,240.414" EndPoint="420,240.414">
+                                                <LinearGradientBrush.Transform>
+                                                    <MatrixTransform Matrix="-1,0,0,-1,420,245" />
+                                                </LinearGradientBrush.Transform>
+                                                <GradientStop Offset="0.25" Color="#FF7F7F7F" />
+                                                <GradientStop Offset="1" Color="#FF3F3F3F" />
+                                            </LinearGradientBrush>
+                                        </Path.Fill>
+                                    </Path>
+                                    <Path Width="18"
+                                          Height="9"
+                                          HorizontalAlignment="Center"
+                                          Data="F1 M17,0 C17,0 17,0 17,0 C17,4 14,7 10,7 C6,7 3,4 3,0 C3,0 3,0 3,0 L0,0 C0,0 0,0 0,0 C0,5 5,10 10,10 C15.5,10 20,5 20,0 C20,0 20,0 20,0 L17,0 z"
+                                          Stretch="Fill">
+                                        <Path.Fill>
+                                            <LinearGradientBrush MappingMode="Absolute" StartPoint="489.5,230.5" EndPoint="509.5,230.5">
+                                                <LinearGradientBrush.Transform>
+                                                    <MatrixTransform Matrix="1,0,-0,-1,-489.5,245" />
+                                                </LinearGradientBrush.Transform>
+                                                <GradientStop Offset="0" Color="White" />
+                                                <GradientStop Offset="0.75" Color="#FF7F7F7F" />
+                                            </LinearGradientBrush>
+                                        </Path.Fill>
+                                    </Path>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </toggleSwitchControl:ClippingBorder>
+                    <toggleSwitchControl:ClippingBorder x:Name="BackgroundAnimation"
+                                                        Background="Black"
+                                                        BorderBrush="Black"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="4"
+                                                        IsTabStop="False"
+                                                        Opacity="0" />
+                    <Rectangle x:Name="DisabledVisualElement"
+                               Fill="White"
+                               IsHitTestVisible="false"
+                               Opacity="0"
+                               RadiusX="4"
+                               RadiusY="4" />
+                    <Rectangle x:Name="FocusVisualElement"
+                               Margin="1"
+                               IsHitTestVisible="false"
+                               Opacity="0"
+                               RadiusX="4"
+                               RadiusY="4"
+                               StrokeThickness="1" />
+                </Grid>
+            </toggleSwitchControl:OuterGlowBorder>
+        </Grid>
+    </ControlTemplate>
+
+    <Style x:Key="LightBulbToggleSwitchStyle" TargetType="toggleSwitchControl:HorizontalToggleSwitch">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Width" Value="130" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="ThumbSize" Value="22" />
+        <Setter Property="ContentTemplate" Value="{StaticResource PresenterContentTemplate}" />
+        <Setter Property="ThumbTemplate" Value="{StaticResource BrushedThumbTemplate}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="toggleSwitchControl:HorizontalToggleSwitch">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DisabledOverlay" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="MouseOver" />
+                                <VisualState x:Name="Pressed" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.10" To="Unchecked" />
+                                    <VisualTransition GeneratedDuration="0:0:0.10" To="Checked" />
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="SwitchUncheckedLabel"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0.5" />
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="SwitchCheckedLabel"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0.99" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="SwitchCheckedLabel"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0.5" />
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="SwitchUncheckedLabel"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0.99" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="DraggingChecked">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="SwitchUncheckedLabel"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0.5" />
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="SwitchCheckedLabel"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0.99" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="DraggingUnchecked">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="SwitchCheckedLabel"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0.5" />
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="SwitchUncheckedLabel"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0.99" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Unfocused" />
+                                <VisualState x:Name="Focused" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentControl x:Name="SwitchUncheckedLabel"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        Content="{TemplateBinding UncheckedContent}"
+                                        Cursor="Hand"
+                                        Focusable="False"
+                                        Foreground="{TemplateBinding UncheckedForeground}"
+                                        IsTabStop="False"
+                                        Opacity="0.99"
+                                        Template="{TemplateBinding ContentTemplate}" />
+                        <Grid Grid.Column="1">
+                            <toggleSwitchControl:ActualSizePropertyProxy x:Name="LightBulbSwitchSizeProxy"
+                                                                         Element="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                                         Visibility="Collapsed" />
+                            <toggleSwitchControl:ClippingBorder Margin="0"
+                                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                                CornerRadius="{Binding ActualHeightValue,
+                                                                                       ConverterParameter=0.5,
+                                                                                       Converter={StaticResource CornerRadiusValueConverter},
+                                                                                       ElementName=LightBulbSwitchSizeProxy}"
+                                                                IsTabStop="False">
+                                <toggleSwitchControl:ClippingBorder.BorderBrush>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Offset="0" Color="#AA373737" />
+                                        <GradientStop Offset="1" Color="#AAF9F9F9" />
+                                    </LinearGradientBrush>
+                                </toggleSwitchControl:ClippingBorder.BorderBrush>
+                                <Grid x:Name="SwitchRoot" Cursor="Hand">
+                                    <toggleSwitchControl:InnerGlowBorder x:Name="innerGlowBorder"
+                                                                         BorderBrush="{x:Null}"
+                                                                         BorderThickness="0"
+                                                                         Foreground="{x:Null}"
+                                                                         InnerGlowColor="Black"
+                                                                         InnerGlowOpacity="0.5"
+                                                                         InnerGlowSize="0,5,0,0"
+                                                                         IsTabStop="False">
+                                        <toggleSwitchControl:InnerGlowBorder.Background>
+                                            <LinearGradientBrush>
+                                                <GradientStop Color="#AA333333" />
+                                                <GradientStop Offset="1" Color="#77DDDDDD" />
+                                            </LinearGradientBrush>
+                                        </toggleSwitchControl:InnerGlowBorder.Background>
+                                    </toggleSwitchControl:InnerGlowBorder>
+                                    <Canvas x:Name="SwitchTrack"
+                                            Height="{TemplateBinding ThumbSize}"
+                                            MinWidth="{TemplateBinding ThumbSize}"
+                                            MinHeight="{TemplateBinding ThumbSize}"
+                                            Cursor="Hand">
+                                        <Thumb x:Name="SwitchThumb"
+                                               Width="{TemplateBinding ThumbSize}"
+                                               Height="{TemplateBinding ThumbSize}"
+                                               Background="{TemplateBinding ThumbBrush}"
+                                               BorderThickness="0"
+                                               Template="{TemplateBinding ThumbTemplate}" />
+                                    </Canvas>
+                                </Grid>
+                            </toggleSwitchControl:ClippingBorder>
+                            <Border x:Name="DisabledOverlay"
+                                    Background="#AAEEEEEE"
+                                    CornerRadius="{Binding ActualHeightValue,
+                                                           ConverterParameter=0.5,
+                                                           Converter={StaticResource CornerRadiusValueConverter},
+                                                           ElementName=LightBulbSwitchSizeProxy}"
+                                    Visibility="Collapsed" />
+                        </Grid>
+                        <ContentControl x:Name="SwitchCheckedLabel"
+                                        Grid.Column="2"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        Content="{TemplateBinding CheckedContent}"
+                                        Cursor="Hand"
+                                        Foreground="{TemplateBinding CheckedForeground}"
+                                        IsTabStop="False"
+                                        Opacity="0.985"
+                                        Template="{TemplateBinding ContentTemplate}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <ControlTemplate x:Key="SafariThumbControlTemplate" TargetType="Thumb">
+        <Grid Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="BackgroundAnimation"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.05" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="BackgroundAnimation"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.25" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="DisabledVisualElement"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To=".55" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="FocusStates">
+                    <VisualState x:Name="Focused">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0"
+                                             Storyboard.TargetName="FocusVisualElement"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.05" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Unfocused" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="CheckStates">
+                    <VisualState x:Name="Unchecked" />
+                    <VisualState x:Name="Checked" />
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <toggleSwitchControl:OuterGlowBorder Background="Transparent"
+                                                 BorderThickness="0"
+                                                 CornerRadius="2"
+                                                 IsTabStop="False"
+                                                 OuterGlowColor="Black"
+                                                 OuterGlowOpacity="0.15"
+                                                 OuterGlowSize="4"
+                                                 ShadowCornerRadius="4">
+                <Grid>
+                    <toggleSwitchControl:ClippingBorder x:Name="Background"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderBrush="#FF656565"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="2"
+                                                        IsTabStop="False" />
+                    <toggleSwitchControl:ClippingBorder x:Name="BackgroundAnimation"
+                                                        Background="Black"
+                                                        BorderBrush="Black"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="2"
+                                                        IsTabStop="False"
+                                                        Opacity="0" />
+                    <Rectangle x:Name="DisabledVisualElement"
+                               Fill="White"
+                               IsHitTestVisible="false"
+                               Opacity="0"
+                               RadiusX="2"
+                               RadiusY="2" />
+                    <Rectangle x:Name="FocusVisualElement"
+                               Margin="1"
+                               IsHitTestVisible="false"
+                               Opacity="0"
+                               RadiusX="2"
+                               RadiusY="2"
+                               StrokeThickness="1" />
+                </Grid>
+            </toggleSwitchControl:OuterGlowBorder>
+        </Grid>
+    </ControlTemplate>
+    <Style x:Key="SafariSwitchStyle" TargetType="toggleSwitchControl:HorizontalToggleSwitch">
+        <Setter Property="Width" Value="120" />
+        <Setter Property="Height" Value="20" />
+        <Setter Property="BorderBrush" Value="#FF6C6C6C" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="0,4" />
+        <Setter Property="UncheckedForeground" Value="#FF3C3C3C" />
+        <Setter Property="CheckedForeground" Value="#FF3C3C3C" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="ThumbSize" Value="30" />
+        <Setter Property="ContentTemplate" Value="{StaticResource EngravedContentTemplate}" />
+        <Setter Property="ThumbTemplate" Value="{StaticResource HorizontalThumbTemplate}" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0" Color="#FF656565" />
+                    <GradientStop Offset="1" Color="#FFA5A5A5" />
+                    <GradientStop Offset="0.095" Color="#FF797979" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ThumbBrush">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="1" Color="#FFE1E1E1" />
+                    <GradientStop Color="#FFFBFBFB" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="toggleSwitchControl:HorizontalToggleSwitch">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DisabledOverlay" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="MouseOver" />
+                                <VisualState x:Name="Pressed" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.10" To="Unchecked" />
+                                    <VisualTransition GeneratedDuration="0:0:0.10" To="Checked" />
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Checked" />
+                                <VisualState x:Name="Unchecked" />
+                                <VisualState x:Name="DraggingChecked" />
+                                <VisualState x:Name="DraggingUnchecked" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <toggleSwitchControl:ActualSizePropertyProxy x:Name="ActualSizeProxy"
+                                                                     Element="{Binding Mode=OneWay,
+                                                                                       RelativeSource={RelativeSource TemplatedParent}}"
+                                                                     IsHitTestVisible="False"
+                                                                     Visibility="Collapsed" />
+                        <ContentControl x:Name="OffLabel"
+                                        VerticalAlignment="Center"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        Content="{TemplateBinding UncheckedContent}"
+                                        Cursor="Hand"
+                                        Focusable="False"
+                                        FontFamily="{TemplateBinding FontFamily}"
+                                        FontSize="{TemplateBinding FontSize}"
+                                        FontStyle="{TemplateBinding FontStyle}"
+                                        FontWeight="{TemplateBinding FontWeight}"
+                                        Foreground="{TemplateBinding UncheckedForeground}"
+                                        IsTabStop="False"
+                                        Padding="0,0,6,0"
+                                        Template="{TemplateBinding ContentTemplate}" />
+                        <toggleSwitchControl:ClippingBorder x:Name="SwitchRoot"
+                                                            Grid.Column="1"
+                                                            Background="{TemplateBinding Background}"
+                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                                            CornerRadius="2"
+                                                            Cursor="Hand"
+                                                            IsTabStop="False">
+                            <Canvas x:Name="SwitchTrack"
+                                    Height="{TemplateBinding Height}"
+                                    Margin="0,-1,0,0"
+                                    Cursor="Hand">
+                                <Thumb x:Name="SwitchThumb"
+                                       Width="{TemplateBinding ThumbSize}"
+                                       Height="{Binding ActualHeightValue,
+                                                        ElementName=ActualSizeProxy}"
+                                       HorizontalAlignment="Left"
+                                       Background="{TemplateBinding ThumbBrush}"
+                                       Cursor="Hand"
+                                       IsTabStop="False"
+                                       Template="{StaticResource SafariThumbControlTemplate}" />
+                            </Canvas>
+                        </toggleSwitchControl:ClippingBorder>
+                        <ContentControl x:Name="OnLabel"
+                                        Grid.Column="2"
+                                        VerticalAlignment="Center"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        Content="{TemplateBinding CheckedContent}"
+                                        Cursor="Hand"
+                                        Focusable="False"
+                                        FontFamily="{TemplateBinding FontFamily}"
+                                        FontSize="{TemplateBinding FontSize}"
+                                        FontStyle="{TemplateBinding FontStyle}"
+                                        FontWeight="{TemplateBinding FontWeight}"
+                                        Foreground="{TemplateBinding CheckedForeground}"
+                                        IsTabStop="False"
+                                        Padding="6,0,0,0"
+                                        Template="{TemplateBinding ContentTemplate}" />
+                        <Border x:Name="DisabledOverlay"
+                                Grid.Column="1"
+                                Height="27"
+                                Background="#AAEEEEEE"
+                                CornerRadius="4"
+                                Visibility="Collapsed" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="MetroToggleSwitchStyle" TargetType="toggleSwitchControl:HorizontalToggleSwitch">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Width" Value="88" />
+        <Setter Property="Height" Value="28" />
+        <Setter Property="BorderBrush" Value="#FFBEBEBE" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="0,4" />
+        <Setter Property="UncheckedForeground" Value="#FF5C5C5C" />
+        <Setter Property="CheckedForeground" Value="White" />
+        <Setter Property="ThumbSize" Value="42" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontFamily" Value="Arial" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="ContentTemplate" Value="{StaticResource EngravedContentTemplate}" />
+        <Setter Property="ThumbTemplate" Value="{StaticResource ThumbWithDoubleArrowTemplate}" />
+        <Setter Property="CheckedBackground">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="1" Color="#FF81B5FB" />
+                    <GradientStop Offset="0.50" Color="#FF5D9FF2" />
+                    <GradientStop Offset="0.50" Color="#FF569BEF" />
+                    <GradientStop Color="#FF3772B9" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="UncheckedBackground">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0" Color="#FFBBBBBB" />
+                    <GradientStop Offset="0.5" Color="#FFE1E2E2" />
+                    <GradientStop Offset="0.5" Color="#FFDDDDDD" />
+                    <GradientStop Offset="1" Color="White" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ThumbBrush">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="#FFD8D7D8" />
+                    <GradientStop Offset="1" Color="#FFFDFCFD" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="toggleSwitchControl:HorizontalToggleSwitch">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DisabledOverlay" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="MouseOver" />
+                                <VisualState x:Name="Pressed" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.10" To="Unchecked" />
+                                    <VisualTransition GeneratedDuration="0:0:0.10" To="Checked" />
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Checked" />
+                                <VisualState x:Name="Unchecked" />
+                                <VisualState x:Name="DraggingChecked" />
+                                <VisualState x:Name="DraggingUnchecked" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <toggleSwitchControl:ClippingBorder x:Name="SwitchRoot"
+                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                            BorderThickness="1"
+                                                            CornerRadius="2"
+                                                            IsTabStop="False">
+                            <Canvas MinWidth="{TemplateBinding ThumbSize}" MinHeight="{TemplateBinding FontSize}">
+                                <toggleSwitchControl:ActualSizePropertyProxy x:Name="ActualSizeProxy"
+                                                                             Element="{Binding Mode=OneWay,
+                                                                                               RelativeSource={RelativeSource TemplatedParent}}"
+                                                                             Visibility="Collapsed" />
+                                <Grid x:Name="SwitchTrack"
+                                      Height="{Binding ActualHeightValue,
+                                                       ElementName=ActualSizeProxy,
+                                                       Mode=OneWay}"
+                                      Margin="0,-1,0,0"
+                                      Cursor="Hand">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Margin="-1,0,0,0"
+                                                Background="{TemplateBinding CheckedBackground}"
+                                                Padding="1,0,0,0">
+                                            <ContentControl x:Name="SwitchChecked"
+                                                            Margin="{TemplateBinding Padding}"
+                                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                            HorizontalContentAlignment="Center"
+                                                            VerticalContentAlignment="Center"
+                                                            Content="{TemplateBinding CheckedContent}"
+                                                            FontFamily="{TemplateBinding FontFamily}"
+                                                            FontSize="{TemplateBinding FontSize}"
+                                                            Foreground="{TemplateBinding CheckedForeground}"
+                                                            IsTabStop="False"
+                                                            Padding="0,0,22,0"
+                                                            Template="{TemplateBinding ContentTemplate}" />
+                                        </Border>
+                                        <Border Margin="-1,0,0,0" Background="{TemplateBinding UncheckedBackground}">
+                                            <ContentControl x:Name="SwitchUnchecked"
+                                                            Margin="{TemplateBinding Padding}"
+                                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                            HorizontalContentAlignment="Center"
+                                                            VerticalContentAlignment="Center"
+                                                            Content="{TemplateBinding UncheckedContent}"
+                                                            FontFamily="{TemplateBinding FontFamily}"
+                                                            FontSize="{TemplateBinding FontSize}"
+                                                            Foreground="{TemplateBinding UncheckedForeground}"
+                                                            IsTabStop="False"
+                                                            Template="{TemplateBinding ContentTemplate}" />
+                                        </Border>
+                                    </StackPanel>
+                                </Grid>
+                                <toggleSwitchControl:InnerGlowBorder Width="{Binding ActualWidthValue,
+                                                                                     ElementName=ActualSizeProxy,
+                                                                                     Mode=OneWay}"
+                                                                     Height="{Binding ActualHeightValue,
+                                                                                      ElementName=ActualSizeProxy,
+                                                                                      Mode=OneWay}"
+                                                                     Margin="-1,-1,0,0"
+                                                                     Background="#00000000"
+                                                                     BorderThickness="0"
+                                                                     CornerRadius="4"
+                                                                     InnerGlowColor="Black"
+                                                                     InnerGlowOpacity="0.25"
+                                                                     InnerGlowSize="2,4,2,0"
+                                                                     IsHitTestVisible="False"
+                                                                     IsTabStop="False" />
+                                <Thumb x:Name="SwitchThumb"
+                                       Width="{TemplateBinding ThumbSize}"
+                                       Height="{Binding ActualHeightValue,
+                                                        ElementName=ActualSizeProxy,
+                                                        Mode=OneWay}"
+                                       Margin="0,-1,0,0"
+                                       HorizontalAlignment="Left"
+                                       Background="{TemplateBinding ThumbBrush}"
+                                       BorderBrush="{TemplateBinding BorderBrush}"
+                                       Cursor="Hand"
+                                       Foreground="#FF359CE6"
+                                       IsTabStop="False"
+                                       Template="{TemplateBinding ThumbTemplate}" />
+                            </Canvas>
+                        </toggleSwitchControl:ClippingBorder>
+                        <Border x:Name="DisabledOverlay"
+                                Background="#AAEEEEEE"
+                                CornerRadius="4"
+                                Visibility="Collapsed" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="iPhoneToggleSwitchStyle" TargetType="{x:Type toggleSwitchControl:HorizontalToggleSwitch}">
+        <Setter Property="Width" Value="88" />
+        <Setter Property="Height" Value="27" />
+        <Setter Property="BorderBrush" Value="#AFBEBEBE" />
+        <Setter Property="UncheckedForeground" Value="#FF5C5C5C" />
+        <Setter Property="CheckedForeground" Value="White" />
+        <Setter Property="ThumbSize" Value="42" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="0,4" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontFamily" Value="Arial" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="ContentTemplate" Value="{StaticResource EngravedContentTemplate}" />
+        <Setter Property="ThumbTemplate" Value="{StaticResource SimpleThumbTemplate}" />
+        <Setter Property="ThumbBrush" Value="{StaticResource iPhoneThumbBrush}" />
+        <Setter Property="Template" Value="{StaticResource HorizontalToggleSwitchTemplate}" />
+        <Setter Property="CheckedBackground">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="1" Color="#FF81B5FB" />
+                    <GradientStop Offset="0.50" Color="#FF5D9FF2" />
+                    <GradientStop Offset="0.50" Color="#FF569BEF" />
+                    <GradientStop Color="#FF3772B9" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="UncheckedBackground">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0" Color="#FFBBBBBB" />
+                    <GradientStop Offset="0.5" Color="#FFE1E2E2" />
+                    <GradientStop Offset="0.5" Color="#FFDDDDDD" />
+                    <GradientStop Offset="1" Color="White" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="iOS5ToggleSwitchStyle" TargetType="toggleSwitchControl:HorizontalToggleSwitch">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Width" Value="65" />
+        <Setter Property="Height" Value="24" />
+        <Setter Property="BorderBrush" Value="#AFBEBEBE" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="0,4" />
+        <Setter Property="UncheckedForeground" Value="#FF5F5F5F" />
+        <Setter Property="CheckedForeground" Value="White" />
+        <Setter Property="ThumbSize" Value="24" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontFamily" Value="Arial" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="ContentTemplate" Value="{StaticResource EngravedContentTemplate}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="ThumbTemplate" Value="{StaticResource iOS5ThumbTemplate}" />
+        <Setter Property="ThumbBrush" Value="{StaticResource iPhoneThumbBrush}" />
+        <Setter Property="CheckedBackground">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="1" Color="#FF017FED" />
+                    <GradientStop Color="#FF3772B9" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="UncheckedBackground">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0" Color="#FFBBBBBB" />
+                    <GradientStop Offset="1" Color="White" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="toggleSwitchControl:HorizontalToggleSwitch">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DisabledOverlay" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="MouseOver" />
+                                <VisualState x:Name="Pressed" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.10" To="Unchecked" />
+                                    <VisualTransition GeneratedDuration="0:0:0.10" To="Checked" />
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Checked" />
+                                <VisualState x:Name="Unchecked" />
+                                <VisualState x:Name="DraggingChecked" />
+                                <VisualState x:Name="DraggingUnchecked" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <toggleSwitchControl:ClippingBorder x:Name="SwitchRoot"
+                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                            BorderThickness="1"
+                                                            CornerRadius="{Binding ActualHeightValue,
+                                                                                   ConverterParameter=0.5,
+                                                                                   Converter={StaticResource CornerRadiusValueConverter},
+                                                                                   ElementName=ActualSizeProxy}"
+                                                            IsTabStop="False">
+                            <Canvas MinWidth="{TemplateBinding ThumbSize}" MinHeight="{TemplateBinding FontSize}">
+                                <toggleSwitchControl:ActualSizePropertyProxy x:Name="ActualSizeProxy"
+                                                                             Element="{Binding Mode=OneWay,
+                                                                                               RelativeSource={RelativeSource TemplatedParent}}"
+                                                                             IsHitTestVisible="False"
+                                                                             Visibility="Collapsed" />
+                                <Grid x:Name="SwitchTrack"
+                                      Height="{Binding ActualHeightValue,
+                                                       ElementName=ActualSizeProxy,
+                                                       Mode=OneWay}"
+                                      Margin="0,-1,0,0"
+                                      Cursor="Hand">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Margin="-1,0,0,0"
+                                                Background="{TemplateBinding CheckedBackground}"
+                                                Padding="1,0,0,0">
+                                            <ContentControl x:Name="SwitchChecked"
+                                                            Margin="{TemplateBinding Padding}"
+                                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                            HorizontalContentAlignment="Center"
+                                                            VerticalContentAlignment="Center"
+                                                            Content="{TemplateBinding CheckedContent}"
+                                                            FontFamily="{TemplateBinding FontFamily}"
+                                                            FontSize="{TemplateBinding FontSize}"
+                                                            Foreground="{TemplateBinding CheckedForeground}"
+                                                            IsTabStop="False"
+                                                            Template="{TemplateBinding ContentTemplate}" />
+                                        </Border>
+                                        <Border Margin="-1,0,0,0" Background="{TemplateBinding UncheckedBackground}">
+                                            <ContentControl x:Name="SwitchUnchecked"
+                                                            Margin="{TemplateBinding Padding}"
+                                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                            HorizontalContentAlignment="Center"
+                                                            VerticalContentAlignment="Center"
+                                                            Content="{TemplateBinding UncheckedContent}"
+                                                            FontFamily="{TemplateBinding FontFamily}"
+                                                            FontSize="{TemplateBinding FontSize}"
+                                                            Foreground="{TemplateBinding UncheckedForeground}"
+                                                            IsTabStop="False"
+                                                            Template="{TemplateBinding ContentTemplate}" />
+                                        </Border>
+                                    </StackPanel>
+                                </Grid>
+                                <toggleSwitchControl:InnerGlowBorder Width="{Binding ActualWidthValue,
+                                                                                     ElementName=ActualSizeProxy,
+                                                                                     Mode=OneWay}"
+                                                                     Height="{Binding ActualHeightValue,
+                                                                                      ElementName=ActualSizeProxy,
+                                                                                      Mode=OneWay}"
+                                                                     Margin="-1,-1,0,0"
+                                                                     Background="#00000000"
+                                                                     BorderThickness="0"
+                                                                     InnerGlowColor="Black"
+                                                                     InnerGlowOpacity="0.25"
+                                                                     InnerGlowSize="1,2,1,0"
+                                                                     IsHitTestVisible="False"
+                                                                     IsTabStop="False">
+                                    <Rectangle Height="{Binding ActualHeightValue,
+                                                                ConverterParameter=0.5,
+                                                                Converter={StaticResource ScalarConverter},
+                                                                ElementName=ActualSizeProxy,
+                                                                Mode=OneWay}"
+                                               Margin="3,0"
+                                               VerticalAlignment="Bottom"
+                                               RadiusX="8"
+                                               RadiusY="8"
+                                               StrokeThickness="0">
+                                        <Rectangle.Fill>
+                                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                                <GradientStop Color="#28FFFFFF" />
+                                                <GradientStop Offset="1" Color="#90FFFFFF" />
+                                            </LinearGradientBrush>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                </toggleSwitchControl:InnerGlowBorder>
+                                <Thumb x:Name="SwitchThumb"
+                                       Width="{TemplateBinding ThumbSize}"
+                                       Height="{Binding ActualHeightValue,
+                                                        ElementName=ActualSizeProxy,
+                                                        Mode=OneWay}"
+                                       Margin="46,-1,0,0"
+                                       Background="{TemplateBinding ThumbBrush}"
+                                       BorderBrush="{TemplateBinding BorderBrush}"
+                                       Cursor="Hand"
+                                       Focusable="False"
+                                       IsTabStop="False"
+                                       Template="{TemplateBinding ThumbTemplate}" />
+                            </Canvas>
+                        </toggleSwitchControl:ClippingBorder>
+                        <Border x:Name="DisabledOverlay"
+                                Background="#AAEEEEEE"
+                                CornerRadius="{Binding ActualHeightValue,
+                                                       ConverterParameter=0.5,
+                                                       Converter={StaticResource CornerRadiusValueConverter},
+                                                       ElementName=ActualSizeProxy}"
+                                Visibility="Collapsed" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <ControlTemplate x:Key="VerticalThumbTemplate" TargetType="Thumb">
+        <toggleSwitchControl:OuterGlowBorder Background="Transparent"
+                                             BorderThickness="0"
+                                             ClipContent="False"
+                                             CornerRadius="4"
+                                             IsTabStop="False"
+                                             OuterGlowColor="Black"
+                                             OuterGlowOpacity="0.2"
+                                             OuterGlowSize="3"
+                                             ShadowCornerRadius="2">
+            <Grid Background="Transparent">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="MouseOver">
+                            <Storyboard>
+                                <DoubleAnimation Duration="0"
+                                                 Storyboard.TargetName="BackgroundAnimation"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0.05" />
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <Storyboard>
+                                <DoubleAnimation Duration="0"
+                                                 Storyboard.TargetName="BackgroundAnimation"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0.25" />
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <Storyboard>
+                                <DoubleAnimation Duration="0"
+                                                 Storyboard.TargetName="DisabledVisualElement"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To=".55" />
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                    <VisualStateGroup x:Name="FocusStates">
+                        <VisualState x:Name="Focused">
+                            <Storyboard>
+                                <DoubleAnimation Duration="0"
+                                                 Storyboard.TargetName="FocusVisualElement"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0.05" />
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Unfocused" />
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <toggleSwitchControl:ClippingBorder x:Name="Background"
+                                                    Background="{TemplateBinding Background}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    CornerRadius="2"
+                                                    IsTabStop="False">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Rectangle Width="14"
+                                   Height="1"
+                                   Fill="#7F969696"
+                                   StrokeThickness="0" />
+                        <Rectangle Width="14"
+                                   Height="1"
+                                   Margin="0,0,0,2"
+                                   Fill="#7FF8F8F8"
+                                   StrokeThickness="0" />
+                        <Rectangle Width="14"
+                                   Height="1"
+                                   Fill="#7F969696"
+                                   StrokeThickness="0" />
+                        <Rectangle Width="14"
+                                   Height="1"
+                                   Margin="0,0,0,2"
+                                   Fill="#7FF8F8F8"
+                                   StrokeThickness="0" />
+                        <Rectangle Width="14"
+                                   Height="1"
+                                   Fill="#7F969696"
+                                   StrokeThickness="0" />
+                        <Rectangle Width="14"
+                                   Height="1"
+                                   Fill="#7FF8F8F8"
+                                   StrokeThickness="0" />
+                    </StackPanel>
+                </toggleSwitchControl:ClippingBorder>
+                <toggleSwitchControl:ClippingBorder x:Name="BackgroundAnimation"
+                                                    Background="Black"
+                                                    BorderBrush="Black"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    CornerRadius="2"
+                                                    IsTabStop="False"
+                                                    Opacity="0" />
+                <Rectangle x:Name="DisabledVisualElement"
+                           Fill="White"
+                           IsHitTestVisible="false"
+                           Opacity="0"
+                           RadiusX="2"
+                           RadiusY="2" />
+                <Rectangle x:Name="FocusVisualElement"
+                           Margin="1"
+                           IsHitTestVisible="false"
+                           Opacity="0"
+                           RadiusX="2"
+                           RadiusY="2"
+                           Stroke="#FF6DBDD1"
+                           StrokeThickness="1" />
+            </Grid>
+        </toggleSwitchControl:OuterGlowBorder>
+    </ControlTemplate>
+
+    <Style TargetType="toggleSwitchControl:VerticalToggleSwitch">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Height" Value="118" />
+        <Setter Property="Width" Value="83" />
+        <Setter Property="BorderBrush" Value="#FFCACACA" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="UncheckedForeground" Value="#FF666666" />
+        <Setter Property="CheckedForeground" Value="#FF565656" />
+        <Setter Property="ThumbSize" Value="25" />
+        <Setter Property="ThumbBrush" Value="WhiteSmoke" />
+        <Setter Property="ThumbTemplate" Value="{StaticResource VerticalThumbTemplate}" />
+        <Setter Property="ContentTemplate" Value="{StaticResource EngravedContentTemplate}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="toggleSwitchControl:VerticalToggleSwitch">
+                    <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DisabledOverlay" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="MouseOver" />
+                                <VisualState x:Name="Pressed" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.10" To="Unchecked" />
+                                    <VisualTransition GeneratedDuration="0:0:0.10" To="Checked" />
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="SwitchUncheckedLabel"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0.75" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="SwitchCheckedLabel"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0.75" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Dragging" />
+                                <VisualState x:Name="DraggingChecked">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="SwitchThumb"
+                                                         Storyboard.TargetProperty="(Canvas.Top)"
+                                                         To="-81" />
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="rectangle"
+                                                         Storyboard.TargetProperty="(Rectangle.RadiusX)"
+                                                         To="5" />
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="rectangle"
+                                                         Storyboard.TargetProperty="(Rectangle.RadiusY)"
+                                                         To="5" />
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="SwitchUncheckedLabel"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0.75" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="DraggingUnchecked">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="SwitchCheckedLabel"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0.75" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <toggleSwitchControl:ClippingBorder Width="{TemplateBinding Width}"
+                                                            Height="{TemplateBinding Height}"
+                                                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                                            VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                                            CornerRadius="3"
+                                                            Padding="4,6,3,4">
+                            <toggleSwitchControl:ClippingBorder.Background>
+                                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                    <GradientStop Offset="1" Color="#FFD0D0D0" />
+                                    <GradientStop Color="#FFF3F3F3" />
+                                </LinearGradientBrush>
+                            </toggleSwitchControl:ClippingBorder.Background>
+                            <Grid x:Name="SwitchRoot"
+                                  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                  VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.5*" />
+                                        <RowDefinition Height="0.5*" />
+                                    </Grid.RowDefinitions>
+                                    <toggleSwitchControl:ClippingBorder Margin="0,4,1,0"
+                                                                        VerticalAlignment="Top"
+                                                                        Cursor="Hand">
+                                        <Grid Height="18">
+                                            <Rectangle x:Name="rectangle"
+                                                       Margin="-4,0,1,0"
+                                                       RadiusX="4"
+                                                       RadiusY="4"
+                                                       Visibility="Collapsed">
+                                                <Rectangle.Stroke>
+                                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                                        <GradientStop Offset="1" Color="#88E9E9E9" />
+                                                        <GradientStop Color="#885E5E5E" />
+                                                    </LinearGradientBrush>
+                                                </Rectangle.Stroke>
+                                                <Rectangle.Fill>
+                                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                                        <GradientStop Color="#442D2D2D" />
+                                                        <GradientStop Offset="1" Color="#44AFAFAF" />
+                                                        <GradientStop Offset="0.189" Color="#445C5C5C" />
+                                                    </LinearGradientBrush>
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                            <ContentControl x:Name="SwitchCheckedLabel"
+                                                            HorizontalAlignment="Left"
+                                                            VerticalAlignment="Stretch"
+                                                            Background="{TemplateBinding CheckedBackground}"
+                                                            Content="{TemplateBinding CheckedContent}"
+                                                            FontFamily="{TemplateBinding FontFamily}"
+                                                            FontSize="{TemplateBinding FontSize}"
+                                                            FontStyle="{TemplateBinding FontStyle}"
+                                                            FontWeight="{TemplateBinding FontWeight}"
+                                                            Foreground="{TemplateBinding CheckedForeground}"
+                                                            IsTabStop="False"
+                                                            Padding="2,0,4,0"
+                                                            Template="{TemplateBinding ContentTemplate}" />
+                                        </Grid>
+                                    </toggleSwitchControl:ClippingBorder>
+                                    <toggleSwitchControl:ClippingBorder Grid.Row="1"
+                                                                        Margin="0,0,1,4"
+                                                                        VerticalAlignment="Bottom"
+                                                                        Cursor="Hand">
+                                        <Grid Height="18">
+                                            <Rectangle x:Name="rectangle1"
+                                                       Margin="-4,0,1,0"
+                                                       RadiusX="4"
+                                                       RadiusY="4"
+                                                       Visibility="Collapsed">
+                                                <Rectangle.Stroke>
+                                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                                        <GradientStop Offset="1" Color="#88C2C2C2" />
+                                                        <GradientStop Color="#886A6A6A" />
+                                                    </LinearGradientBrush>
+                                                </Rectangle.Stroke>
+                                                <Rectangle.Fill>
+                                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                                        <GradientStop Color="#442D2D2D" />
+                                                        <GradientStop Offset="1" Color="#44AFAFAF" />
+                                                        <GradientStop Offset="0.189" Color="#445C5C5C" />
+                                                    </LinearGradientBrush>
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                            <ContentControl x:Name="SwitchUncheckedLabel"
+                                                            HorizontalAlignment="Left"
+                                                            VerticalAlignment="Stretch"
+                                                            Content="{TemplateBinding UncheckedContent}"
+                                                            FontFamily="{TemplateBinding FontFamily}"
+                                                            FontSize="{TemplateBinding FontSize}"
+                                                            FontStyle="{TemplateBinding FontStyle}"
+                                                            FontWeight="{TemplateBinding FontWeight}"
+                                                            Foreground="{TemplateBinding UncheckedForeground}"
+                                                            IsTabStop="False"
+                                                            Padding="2,0,4,0"
+                                                            Template="{TemplateBinding ContentTemplate}" />
+                                        </Grid>
+                                    </toggleSwitchControl:ClippingBorder>
+                                </Grid>
+                                <toggleSwitchControl:ClippingBorder Margin="0" CornerRadius="4">
+                                    <toggleSwitchControl:ClippingBorder.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Offset="0" Color="#FF0ACC0D" />
+                                            <GradientStop Offset="1" Color="#FFF9FF92" />
+                                        </LinearGradientBrush>
+                                    </toggleSwitchControl:ClippingBorder.Background>
+                                    <Grid>
+                                        <toggleSwitchControl:InnerGlowBorder Background="{x:Null}"
+                                                                             BorderThickness="0"
+                                                                             ClipContent="False"
+                                                                             CornerRadius="4"
+                                                                             InnerGlowColor="Black"
+                                                                             InnerGlowOpacity="0.15"
+                                                                             InnerGlowSize="3,5,3,2"
+                                                                             IsTabStop="False" />
+                                        <StackPanel VerticalAlignment="Center" Orientation="Vertical">
+                                            <Path Height="27"
+                                                  Margin="2,-3"
+                                                  Data="M-0.79419744,59.372883 L15.553296,49.89521 L31.891663,59.372883 L31.891663,67.875198 L15.548733,58.462936 L-0.79419744,67.906197 z"
+                                                  Fill="#3FFFFFFF"
+                                                  Stretch="Fill"
+                                                  StrokeThickness="0" />
+                                            <Path Height="27"
+                                                  Margin="2,-3"
+                                                  Data="M-0.79419744,59.372883 L15.553296,49.89521 L31.891663,59.372883 L31.891663,67.875198 L15.548733,58.462936 L-0.79419744,67.906197 z"
+                                                  Fill="#3FFFFFFF"
+                                                  Stretch="Fill"
+                                                  StrokeThickness="0" />
+                                            <Path Height="27"
+                                                  Margin="2,-3"
+                                                  Data="M-0.79419744,59.372883 L15.553296,49.89521 L31.891663,59.372883 L31.891663,67.875198 L15.548733,58.462936 L-0.79419744,67.906197 z"
+                                                  Fill="#3FFFFFFF"
+                                                  Stretch="Fill"
+                                                  StrokeThickness="0" />
+                                            <Path Height="27"
+                                                  Margin="2,-3"
+                                                  Data="M-0.79419744,59.372883 L15.553296,49.89521 L31.891663,59.372883 L31.891663,67.875198 L15.548733,58.462936 L-0.79419744,67.906197 z"
+                                                  Fill="#3FFFFFFF"
+                                                  Stretch="Fill"
+                                                  StrokeThickness="0" />
+                                            <Path Height="27"
+                                                  Margin="2,-3"
+                                                  Data="M-0.79419744,59.372883 L15.553296,49.89521 L31.891663,59.372883 L31.891663,67.875198 L15.548733,58.462936 L-0.79419744,67.906197 z"
+                                                  Fill="#3FFFFFFF"
+                                                  Stretch="Fill"
+                                                  StrokeThickness="0" />
+                                            <Path Height="27"
+                                                  Margin="2,-3"
+                                                  Data="M-0.79419744,59.372883 L15.553296,49.89521 L31.891663,59.372883 L31.891663,67.875198 L15.548733,58.462936 L-0.79419744,67.906197 z"
+                                                  Fill="#3FFFFFFF"
+                                                  Stretch="Fill"
+                                                  StrokeThickness="0" />
+                                        </StackPanel>
+                                        <Canvas x:Name="SwitchTrack" Cursor="Hand">
+                                            <toggleSwitchControl:ActualSizePropertyProxy x:Name="ActualSizePropertyProxy"
+                                                                                         Element="{Binding ElementName=SwitchTrack,
+                                                                                                           Mode=OneWay}"
+                                                                                         Visibility="Collapsed" />
+                                            <Thumb x:Name="SwitchThumb"
+                                                   Width="{Binding ActualWidthValue,
+                                                                   ElementName=ActualSizePropertyProxy,
+                                                                   Mode=OneWay}"
+                                                   Height="{TemplateBinding ThumbSize}"
+                                                   VerticalAlignment="Bottom"
+                                                   Background="{TemplateBinding ThumbBrush}"
+                                                   BorderBrush="{TemplateBinding BorderBrush}"
+                                                   BorderThickness="1"
+                                                   IsTabStop="False"
+                                                   Template="{TemplateBinding ThumbTemplate}" />
+                                        </Canvas>
+                                    </Grid>
+                                </toggleSwitchControl:ClippingBorder>
+                            </Grid>
+                        </toggleSwitchControl:ClippingBorder>
+                        <Border x:Name="DisabledOverlay"
+                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                Background="#AAEEEEEE"
+                                CornerRadius="6"
+                                Visibility="Collapsed" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

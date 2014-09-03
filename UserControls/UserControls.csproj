@@ -53,6 +53,20 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\ToggleSwitch\3rdParty\ActualSizePropertyProxy.cs" />
+    <Compile Include="src\ToggleSwitch\3rdParty\ClippingBorder.cs" />
+    <Compile Include="src\ToggleSwitch\3rdParty\CornerRadiusValueConverter.cs" />
+    <Compile Include="src\ToggleSwitch\3rdParty\DropShadowTextBlock.cs" />
+    <Compile Include="src\ToggleSwitch\3rdParty\HelperExtensions.cs" />
+    <Compile Include="src\ToggleSwitch\3rdParty\HorizontalToggleSwitch.cs" />
+    <Compile Include="src\ToggleSwitch\3rdParty\InnerGlowBorder.cs" />
+    <Compile Include="src\ToggleSwitch\3rdParty\OuterGlowBorder.cs" />
+    <Compile Include="src\ToggleSwitch\3rdParty\ScalarValueConverter.cs" />
+    <Compile Include="src\ToggleSwitch\3rdParty\ToggleButton.cs" />
+    <Compile Include="src\ToggleSwitch\3rdParty\ToggleSwitchBase.cs" />
+    <Compile Include="src\ToggleSwitch\3rdParty\VerticalToggleSwitch.cs" />
+    <Compile Include="src\ToggleSwitch\ExtendedToggleButton.cs" />
+    <Compile Include="src\ToggleSwitch\ToggleButton.cs" />
     <Page Include="src\Authentication\SimpleLoginPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -62,6 +76,18 @@
       <DependentUpon>SimpleLoginPanel.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="src\ToggleSwitch\3rdParty\Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="src\ToggleSwitch\3rdParty\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="src\ToggleSwitch\3rdParty\ToggleButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -86,6 +112,10 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="resources\Knob.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
