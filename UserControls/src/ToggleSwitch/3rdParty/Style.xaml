@@ -3,7 +3,7 @@
                     xmlns:toggleSwitchControl="clr-namespace:Common.ToggleSwitchControl">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/src/ToggleSwitch/3rdParty/Generic.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/UserControls;component/src/ToggleSwitch/3rdParty/Generic.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <toggleSwitchControl:CornerRadiusValueConverter x:Key="CornerRadiusValueConverter" />

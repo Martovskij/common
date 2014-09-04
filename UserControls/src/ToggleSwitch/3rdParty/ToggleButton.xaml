@@ -3,8 +3,15 @@
                     xmlns:controls="clr-namespace:Common.ToggleSwitchControl">
 
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/UserControls;component/src/ToggleSwitch/3rdParty/Style.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+
     <!--  Стиль для кнопки с галочкой  -->
-    <Style x:Key="MarkedToggleButtonStyle" TargetType="controls:HorizontalToggleSwitch">
+    <Style x:Key="MarkedToggleButtonStyle"
+           BasedOn="{StaticResource DefaultToggleButtonStyle}"
+           TargetType="controls:HorizontalToggleSwitch">
         <Setter Property="UncheckedContent">
             <Setter.Value>
                 <Grid>

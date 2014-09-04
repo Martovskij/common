@@ -15,10 +15,10 @@ namespace Common.ToggleSwitchControl
 
 		private static void OnElementPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-            if (d != null)
-            {
-                ((ActualSizePropertyProxy)d).OnElementChanged(e);
-            }
+						if (d != null)
+						{
+								((ActualSizePropertyProxy)d).OnElementChanged(e);
+						}
 		}
 
 		public FrameworkElement Element
@@ -49,10 +49,10 @@ namespace Common.ToggleSwitchControl
 				oldElement.SizeChanged -= ElementSizeChanged;
 			}
 
-            if (newElement != null)
-            {
-                newElement.SizeChanged += ElementSizeChanged;
-            }
+						if (newElement != null)
+						{
+								newElement.SizeChanged += ElementSizeChanged;
+						}
 
 			NotifyPropertyChanged();
 		}

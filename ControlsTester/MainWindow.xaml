@@ -1,0 +1,28 @@
+﻿<Window x:Class="ControlsTester.MainWindow"
+        xmlns:map="clr-namespace:SharpMap;assembly=SharpMap.UI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        
+        xmlns:controls="clr-namespace:UserControls.Map;assembly=UserControls"
+        Title="MainWindow"
+        Width="525"
+        Height="350">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary Source="pack://application:,,,/UserControls;component/src/ModuleDictionary.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+     
+  <DockPanel LastChildFill="True">
+      <TextBox DockPanel.Dock="Top" DataContext="{Binding ElementName=MapCanv}" Text="{Binding Latitude}"/>
+        <TextBox DockPanel.Dock="Top" DataContext="{Binding ElementName=MapCanv}" Text="{Binding Longitude}" />
+      <controls:MapCanvas DockPanel.Dock="Top" x:Name="MapCanv" />
+  </DockPanel>
+
+   
+</Window>

@@ -20,7 +20,7 @@ namespace Common.ToggleSwitchControl
 	///</summary>
 	public class HorizontalToggleSwitch : ToggleSwitchBase
 	{
-		internal HorizontalToggleSwitch()
+		public HorizontalToggleSwitch()
 		{
 			DefaultStyleKey = typeof(HorizontalToggleSwitch);
 		}

@@ -51,8 +51,38 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock">
+      <HintPath>libs\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.resources">
+      <HintPath>libs\Xceed.Wpf.AvalonDock.resources.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero">
+      <HintPath>libs\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
+      <HintPath>libs\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
+      <HintPath>libs\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>libs\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>libs\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Map\BitmapStore.cs" />
+    <Compile Include="src\Map\MapCanvas.cs" />
+    <Compile Include="src\Map\MapCanvas.MapOffset.cs" />
+    <Compile Include="src\Map\SearchErrorEventArgs.cs" />
+    <Compile Include="src\Map\SearchProvider.cs" />
+    <Compile Include="src\Map\SearchResult.cs" />
+    <Compile Include="src\Map\Tile.cs" />
+    <Compile Include="src\Map\TileGenerator.cs" />
+    <Compile Include="src\Map\TilePanel.cs" />
     <Compile Include="src\ToggleSwitch\3rdParty\ActualSizePropertyProxy.cs" />
     <Compile Include="src\ToggleSwitch\3rdParty\ClippingBorder.cs" />
     <Compile Include="src\ToggleSwitch\3rdParty\CornerRadiusValueConverter.cs" />
@@ -76,6 +106,10 @@
       <DependentUpon>SimpleLoginPanel.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="src\ModuleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="src\ToggleSwitch\3rdParty\Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -85,6 +119,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="src\ToggleSwitch\3rdParty\ToggleButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="src\ToggleSwitch\3rdParty\ToggleSwitchDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,7 +157,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)bin\$(ProjectName).dll"</PostBuildEvent>
+    <PostBuildEvent>copy /Y "$(TargetDir)*.*" "$(SolutionDir)bin\*.*"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

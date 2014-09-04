@@ -444,7 +444,7 @@
         </Grid>
     </ControlTemplate>
 
-    <Style TargetType="toggleSwitchControl:HorizontalToggleSwitch">
+    <Style x:Key="DefaultToggleButtonStyle" TargetType="toggleSwitchControl:HorizontalToggleSwitch">
         <Setter Property="Width" Value="88" />
         <Setter Property="Height" Value="25" />
         <Setter Property="BorderBrush" Value="#77979797" />
