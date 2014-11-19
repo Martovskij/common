@@ -1,0 +1,10 @@
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask AssemblyFile="$(SolutionDir)SpellCheck\ResXSpellChecker.dll" TaskName="NpoComputer.Tools.ResXSpellCheck" />
+  <Target Name="AfterBuild">
+    <ItemGroup>
+      <SpellCheckLanguage Include="en" />
+      <SpellCheckLanguage Include="ru" />
+    </ItemGroup>
+    <ResXSpellCheck Condition=" '$(Configuration)' == 'CheckIn' " DefaultLanguage="en" Languages="@(SpellCheckLanguage)" ExcludedWordsDirectory="$(SolutionDir)SpellCheck" />
+  </Target>
+</Project>
