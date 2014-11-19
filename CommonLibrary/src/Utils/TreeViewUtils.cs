@@ -7,7 +7,7 @@ namespace CommonLibrary
   /// <summary>
   /// Хэлпер для TreeView.
   /// </summary>
-  public static class TreeViewUtils
+  public static class TreeViewCommonLibrary
   {
     /// <summary>
     /// Выполнить действие над TreeViewItem, соответствующим заданному объекту, отображаемому в дереве.

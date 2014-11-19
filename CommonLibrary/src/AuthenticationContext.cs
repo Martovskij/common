@@ -1,6 +1,6 @@
 ﻿using System.Security;
 
-namespace Utils
+namespace CommonLibrary
 {
   /// <summary>
   /// Аггрегатор аутентификационных данных.

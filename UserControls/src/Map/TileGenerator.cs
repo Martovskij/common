@@ -144,7 +144,7 @@ namespace UserControls.Map
             }
 
             double tileCount = Math.Pow(2, zoom) - 1;
-            if (x < 0 || y < 0 || x > tileCount || y > tileCount) // Bounds check
+            if (x < 0 || y < 0 || x > tileCount || y > tileCount)
             {
                 return null;
             }

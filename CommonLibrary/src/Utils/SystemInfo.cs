@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Interop;
-using CommonLibrary.Utils;
+using CommonLibrary.CommonLibrary;
 
 namespace CommonLibrary
 {

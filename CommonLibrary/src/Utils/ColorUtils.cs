@@ -5,7 +5,7 @@ namespace CommonLibrary
   /// <summary>
   /// Вспомогательные утилиты для работы с цветами.
   /// </summary>
-  public static class ColorUtils
+  public static class ColorCommonLibrary
   {
     /// <summary>
     /// Изменить яркость цвета.

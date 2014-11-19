@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Windows;
 
-namespace CommonLibrary.Utils
+namespace CommonLibrary.CommonLibrary
 {
   /// <summary>
   /// Вспомогательный класс для работы со стилями.
   /// </summary>
-  public static class StyleUtils
+  public static class StyleCommonLibrary
   {
     /// <summary>
     /// Объединить два стиля в один.

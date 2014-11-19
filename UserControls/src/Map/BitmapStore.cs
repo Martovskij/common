@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.Windows.Media.Imaging;
 using System.Threading;
+using System.Windows.Media.Imaging;
 
 namespace UserControls.Map
 {

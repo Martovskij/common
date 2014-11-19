@@ -8,7 +8,7 @@ namespace CommonLibrary
   /// <summary>
   /// Класс-расширение для работы с файлами.
   /// </summary>
-  public static class FileUtils
+  public static class FileCommonLibrary
   {
     #region
 

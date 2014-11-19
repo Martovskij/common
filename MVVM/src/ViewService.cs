@@ -14,15 +14,14 @@ namespace MVVM
     #region Поля и свойства
 
     /// <summary>
-    /// Контейнер сопоставления типов моделей-представления с типами представления (View to ViewModel).
-    /// </summary>
-    private static Dictionary<Type, Type> windowAssociateContainer = new Dictionary<Type, Type>(); 
-
-
-    /// <summary>
     /// Коллекция открытых окон.
     /// </summary>
     private static readonly Collection<Window> openedWindows = new Collection<Window>();
+
+    /// <summary>
+    /// Контейнер сопоставления типов моделей-представления с типами представления (View to ViewModel).
+    /// </summary>
+    private static Dictionary<Type, Type> windowAssociateContainer = new Dictionary<Type, Type>(); 
 
     #endregion
 
@@ -46,8 +45,9 @@ namespace MVVM
     /// <param name="viewModel">Модель представления.</param>
     /// <param name="width">Ширина окна.</param>
     /// <param name="height">Высота окна.</param>
-    /// <param name="mode">Режим отображения.</param>
-    public static Window OpenViewModel(ViewModelBase viewModel, double width, double height, ViewMode mode)
+    /// <param name="model">Режим отображения.</param>
+    /// <returns>Представление (окно).</returns>
+    public static Window OpenViewModel(ViewModelBase viewModel, double width, double height, ViewMode model)
     {
       var openedWindow = openedWindows.SingleOrDefault(window => window.DataContext.Equals(viewModel));
       if (openedWindow == null)
@@ -65,7 +65,7 @@ namespace MVVM
         openedWindow.DataContext = viewModel;
         openedWindow.Closed += OpenedWindowClosed;
         openedWindows.Add(openedWindow);
-        if (mode == ViewMode.Modal)
+        if (model == ViewMode.Modal)
           openedWindow.ShowDialog();
         else
           openedWindow.Show();
@@ -86,6 +86,7 @@ namespace MVVM
     /// Открыть представление.
     /// </summary>
     /// <param name="viewModel">Модель представления.</param>
+    /// <returns>Представление (окно).</returns>
     public static Window OpenViewModel(ViewModelBase viewModel)
     {
       return OpenViewModel(viewModel, 640, 480, ViewMode.Unmodal);
@@ -95,6 +96,7 @@ namespace MVVM
     /// Открыть представление как модальное.
     /// </summary>
     /// <param name="viewModel">Модель представления.</param>
+    /// <returns>Представление (окно).</returns>
     public static Window OpenViewModelAsModal(ViewModelBase viewModel)
     {
       return OpenViewModel(viewModel, 640, 480, ViewMode.Modal);

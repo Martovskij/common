@@ -6,7 +6,7 @@ namespace CommonLibrary
   /// <summary>
   /// Класс-расширение для работы с каталогами.
   /// </summary>
-  public static class DirectoryUtils
+  public static class DirectoryCommonLibrary
   {
     #region Методы
 
@@ -58,7 +58,7 @@ namespace CommonLibrary
     private static void RemoveAllFileAttributeInDirectory(string path, bool recursive)
     {
       Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories)
-        .ForEach(file => FileUtils.RemoveFileAttribute(file, FileAttributes.ReadOnly));
+        .ForEach(file => FileCommonLibrary.RemoveFileAttribute(file, FileAttributes.ReadOnly));
       if (recursive)
         Directory.EnumerateDirectories(path).ForEach(sub => RemoveAllFileAttributeInDirectory(sub, recursive));
     }

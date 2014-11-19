@@ -10,10 +10,10 @@ namespace UserControls.Map
     /// <summary>Displays a grid of Tiles.</summary>
     internal sealed class TilePanel : Canvas
     {
-        private Tile _baseTile;
-        private int _columns;
-        private int _rows;
-        private int _zoom;
+        private Tile baseTile;
+        private int columns;
+        private int rows;
+        private int zoom;
 
         /// <summary>Initializes a new instance of the TilePanel class.</summary>
         public TilePanel()
@@ -33,9 +33,9 @@ namespace UserControls.Map
         {
             get
             {
-                return _baseTile == null ||
-                       (_baseTile.TileX + 1) - this.LeftTile != 0 || // The baseTile is located at -1,-1 but LeftTile/TopTile is 0,0
-                       (_baseTile.TileY + 1) - this.TopTile != 0;
+                return baseTile == null ||
+                       (baseTile.TileX + 1) - this.LeftTile != 0 || // The baseTile is located at -1,-1 but LeftTile/TopTile is 0,0
+                       (baseTile.TileY + 1) - this.TopTile != 0;
             }
         }
 
@@ -44,14 +44,14 @@ namespace UserControls.Map
         {
             get
             {
-                return _zoom;
+                return zoom;
             }
             set
             {
-                if (_zoom != value)
+                if (zoom != value)
                 {
-                    _zoom = value;
-                    _baseTile = null; // Force complete refresh
+                    zoom = value;
+                    baseTile = null; // Force complete refresh
                 }
             }
         }
@@ -60,22 +60,22 @@ namespace UserControls.Map
         /// <remarks>The control will only update itself when RequiresUpdate returns true.</remarks>
         public void Update()
         {
-            if (_baseTile == null)
+            if (baseTile == null)
             {
                 this.RegenerateTiles();
             }
             else
             {
-                int changeX = (_baseTile.TileX + 1) - this.LeftTile;
-                int changeY = (_baseTile.TileY + 1) - this.TopTile;
+                int changeX = (baseTile.TileX + 1) - this.LeftTile;
+                int changeY = (baseTile.TileY + 1) - this.TopTile;
 
                 if ((changeX != 0) || (changeY != 0))
                 {
                     if (((Math.Abs(changeX) > 1) && (Math.Abs(changeY) > 1)) || (this.Children.Count == 0))
-                    { // It's changed too much or we don't have any tiles
+                    {
                         this.RegenerateTiles();
                     }
-                    else // Only changed a little
+                    else 
                     {
                         if (changeX != 0)
                         {
@@ -96,22 +96,22 @@ namespace UserControls.Map
         {
             base.OnRenderSizeChanged(sizeInfo);
 
-            int oldColumns = _columns;
-            int oldRows = _rows;
-            _rows = (int)Math.Ceiling(sizeInfo.NewSize.Height / TileGenerator.TileSize) + 1;
-            _columns = (int)Math.Ceiling(sizeInfo.NewSize.Width / TileGenerator.TileSize) + 1;
+            int oldColumns = columns;
+            int oldRows = rows;
+            rows = (int)Math.Ceiling(sizeInfo.NewSize.Height / TileGenerator.TileSize) + 1;
+            columns = (int)Math.Ceiling(sizeInfo.NewSize.Width / TileGenerator.TileSize) + 1;
 
-            if (oldColumns < _columns || oldRows < _rows) // First check if we need to add tiles
+            if (oldColumns < columns || oldRows < rows)
             {
                 this.RegenerateTiles();
             }
-            else if (oldColumns > _columns || oldRows > _rows) // Don't need to add so we can just trim the columns/rows
+            else if (oldColumns > columns || oldRows > rows)
             {
                 // Would be easier if we could use the IList<T>.RemoveAll but UIElementCollection doesn't have it
                 for (int i = this.Children.Count - 1; i >= 0; --i)
                 {
                     Tile tile = (Tile)this.Children[i];
-                    if (tile.Column >= _columns || tile.Row >= _rows)
+                    if (tile.Column >= columns || tile.Row >= rows)
                     {
                         this.Children.RemoveAt(i);
                     }
@@ -128,13 +128,13 @@ namespace UserControls.Map
                     tile.Column += amount;
                     if (tile.Column < -1)
                     {
-                        tile.Column = _columns - 1;
-                        tile.TileX += _columns + 1;
+                        tile.Column = columns - 1;
+                        tile.TileX += columns + 1;
                     }
-                    else if (tile.Column > _columns - 1)
+                    else if (tile.Column > columns - 1)
                     {
                         tile.Column = -1;
-                        tile.TileX -= _columns + 1;
+                        tile.TileX -= columns + 1;
                     }
                 });
         }
@@ -148,13 +148,13 @@ namespace UserControls.Map
                 tile.Row += amount;
                 if (tile.Row < -1)
                 {
-                    tile.Row = _rows - 1;
-                    tile.TileY += _rows + 1;
+                    tile.Row = rows - 1;
+                    tile.TileY += rows + 1;
                 }
-                else if (tile.Row > _rows - 1)
+                else if (tile.Row > rows - 1)
                 {
                     tile.Row = -1;
-                    tile.TileY -= _rows + 1;
+                    tile.TileY -= rows + 1;
                 }
             });
         }
@@ -163,16 +163,16 @@ namespace UserControls.Map
         /// <param name="changeTile">Called on every Tile to allow changes to be made to its position.</param>
         private void ChangeTiles(Action<Tile> changeTile)
         {
-            _baseTile = (Tile)this.Children[0]; // We need something to compare to so set it to the first.
+            baseTile = (Tile)this.Children[0]; // We need something to compare to so set it to the first.
             for (int i = 0; i < this.Children.Count; ++i)
             {
                 Tile tile = (Tile)this.Children[i];
                 changeTile(tile);
                 Canvas.SetLeft(tile, TileGenerator.TileSize * tile.Column);
                 Canvas.SetTop(tile, TileGenerator.TileSize * tile.Row);
-                if (tile.TileX <= _baseTile.TileX && tile.TileY <= _baseTile.TileY) // Find the upper left tile
+                if (tile.TileX <= baseTile.TileX && tile.TileY <= baseTile.TileY) // Find the upper left tile
                 {
-                    _baseTile = tile;
+                    baseTile = tile;
                 }
             }
         }
@@ -181,9 +181,9 @@ namespace UserControls.Map
         private void RegenerateTiles()
         {
             this.Children.Clear();
-            for (int x = -1; x < _columns; ++x)
+            for (int x = -1; x < columns; ++x)
             {
-                for (int y = -1; y < _rows; ++y)
+                for (int y = -1; y < rows; ++y)
                 {
                     Tile tile = new Tile(this.Zoom, this.LeftTile + x, this.TopTile + y);
                     tile.Column = x;
@@ -193,7 +193,7 @@ namespace UserControls.Map
                     this.Children.Add(tile);
                 }
             }
-            _baseTile = (Tile)this.Children[0];
+            baseTile = (Tile)this.Children[0];
         }
     }
 }

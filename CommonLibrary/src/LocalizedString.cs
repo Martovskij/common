@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 
-namespace Utils
+namespace CommonLibrary
 {
     /// <summary>
     /// Локализованная строка.
@@ -27,7 +27,7 @@ namespace Utils
       /// <summary>
       /// Конструктор для одной англоязычной строки.
       /// </summary>
-      /// <param name="value"></param>
+      /// <param name="value">Значение строки.</param>
       public LocalizedString(string value)
       {
         if (value == null)
@@ -36,10 +36,10 @@ namespace Utils
       }
 
       /// <summary>
-      /// 
+      /// Конструктор мультиязычной строки.
       /// </summary>
-      /// <param name="ruValue"></param>
-      /// <param name="enValue"></param>
+      /// <param name="ruValue">RU-версия.</param>
+      /// <param name="enValue">EN-версия.</param>
       public LocalizedString(string ruValue, string enValue)
       {
         if (ruValue == null)

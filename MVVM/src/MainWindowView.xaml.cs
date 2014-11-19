@@ -16,12 +16,12 @@ using System.Windows.Shapes;
 namespace MVVM
 {
   /// <summary>
-  /// Interaction logic for MainWindowView.xaml
+  /// Interaction logic for MainWindowView.xaml.
   /// </summary>
   public partial class MainWindowView : UserControl
   {
     /// <summary>
-    /// dasdad.
+    /// Конструктор.
     /// </summary>
     public MainWindowView()
     {

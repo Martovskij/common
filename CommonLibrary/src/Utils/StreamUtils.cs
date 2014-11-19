@@ -6,7 +6,7 @@ namespace CommonLibrary
   /// <summary>
   /// Класс-расширение для работы с потоками.
   /// </summary>
-  public static class StreamUtils
+  public static class StreamCommonLibrary
   {
     /// <summary>
     /// Получить строковое представление MD5-хеша.

@@ -56,7 +56,7 @@ namespace CommonLibrary
   /// <summary>
   /// Вспомогательный класс для работы с изображениями.
   /// </summary>
-  public static class ImageUtils
+  public static class ImageCommonLibrary
   {
     #region Константы
 
@@ -208,19 +208,19 @@ namespace CommonLibrary
             inputStream.CopyTo(memoryStream, BufferSize);
             memoryStream.Position = 0;
 
-            BitmapImage result = ImageUtils.BeginInit();
-            if ((decodePixelWidth > 0 || decodePixelHeight > 0) && !ImageUtils.IgnorePixelDecode)
+            BitmapImage result = ImageCommonLibrary.BeginInit();
+            if ((decodePixelWidth > 0 || decodePixelHeight > 0) && !ImageCommonLibrary.IgnorePixelDecode)
             {
               BitmapDecoder decoder = BitmapDecoder.Create(memoryStream, BitmapCreateOptions.None, BitmapCacheOption.None);
               BitmapSource bitmapSource = decoder.Frames[0];
 
               memoryStream.Position = 0;
               result.StreamSource = memoryStream;
-              ImageUtils.MeasureSize(ref result, bitmapSource, decodePixelWidth, decodePixelHeight);
+              ImageCommonLibrary.MeasureSize(ref result, bitmapSource, decodePixelWidth, decodePixelHeight);
             }
             else
               result.StreamSource = memoryStream;
-            ImageUtils.EndInit(result);
+            ImageCommonLibrary.EndInit(result);
             return result;
           }
         }
@@ -248,19 +248,19 @@ namespace CommonLibrary
           return null;
         using (MemoryStream memoryStream = new MemoryStream(imageSource))
         {
-          BitmapImage result = ImageUtils.BeginInit();
-          if ((decodePixelWidth > 0 || decodePixelHeight > 0) && !ImageUtils.IgnorePixelDecode)
+          BitmapImage result = ImageCommonLibrary.BeginInit();
+          if ((decodePixelWidth > 0 || decodePixelHeight > 0) && !ImageCommonLibrary.IgnorePixelDecode)
           {
             BitmapDecoder decoder = BitmapDecoder.Create(memoryStream, BitmapCreateOptions.None, BitmapCacheOption.None);
             BitmapSource bitmapSource = decoder.Frames[0];
 
             memoryStream.Position = 0;
             result.StreamSource = memoryStream;
-            ImageUtils.MeasureSize(ref result, bitmapSource, decodePixelWidth, decodePixelHeight);
+            ImageCommonLibrary.MeasureSize(ref result, bitmapSource, decodePixelWidth, decodePixelHeight);
           }
           else
             result.StreamSource = memoryStream;
-          ImageUtils.EndInit(result);
+          ImageCommonLibrary.EndInit(result);
           return result;
         }
       }
@@ -304,7 +304,7 @@ namespace CommonLibrary
       using (MemoryStream stream = new MemoryStream())
       {
         var formatString = ((BitmapMetadata)image.Metadata).Format;
-        var imageFormat = ImageUtils.GetImageFormatFromString(formatString);
+        var imageFormat = ImageCommonLibrary.GetImageFormatFromString(formatString);
         BitmapEncoder encoder = BitmapEncoder.Create(GetImageContainerFormat(imageFormat));
         encoder.Frames.Add(BitmapFrame.Create(image, null, (BitmapMetadata)image.Metadata, ((BitmapFrame)image).ColorContexts));
         encoder.Save(stream);
@@ -325,18 +325,18 @@ namespace CommonLibrary
       {
         using (var stream = new MemoryStream())
         {
-          ImageUtils.SaveImageToStream(stream, ImageUtils.GetImageFormatFromString(((BitmapMetadata)inputImage.Metadata).Format), inputImage);
+          ImageCommonLibrary.SaveImageToStream(stream, ImageCommonLibrary.GetImageFormatFromString(((BitmapMetadata)inputImage.Metadata).Format), inputImage);
           stream.Position = 0;
 
-          BitmapImage result = ImageUtils.BeginInit();
-          if ((decodePixelWidth > 0 || decodePixelHeight > 0) && !ImageUtils.IgnorePixelDecode)
+          BitmapImage result = ImageCommonLibrary.BeginInit();
+          if ((decodePixelWidth > 0 || decodePixelHeight > 0) && !ImageCommonLibrary.IgnorePixelDecode)
           {
             result.StreamSource = stream;
-            ImageUtils.MeasureSize(ref result, inputImage, decodePixelWidth, decodePixelHeight);
+            ImageCommonLibrary.MeasureSize(ref result, inputImage, decodePixelWidth, decodePixelHeight);
           }
           else
             result.StreamSource = stream;
-          ImageUtils.EndInit(result);
+          ImageCommonLibrary.EndInit(result);
           return result;
         }
       }

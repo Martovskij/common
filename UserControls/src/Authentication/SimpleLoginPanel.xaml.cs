@@ -2,18 +2,16 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using UserControls.Authentication;
-using Utils;
 
 namespace UserControls.Authentication
 {
     /// <summary>
-    /// Interaction logic for SimpleLoginPanel.xaml
+    /// Interaction logic for SimpleLoginPanel.xaml.
     /// </summary>
     public partial class SimpleLoginPanel : UserControl
     {
       public static readonly RoutedEvent AuthenticateEvent = EventManager
-        .RegisterRoutedEvent("Authenticate", RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (SimpleLoginPanel));
+        .RegisterRoutedEvent("Authenticate", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SimpleLoginPanel));
 
       public event RoutedEventHandler Authenticate
       {

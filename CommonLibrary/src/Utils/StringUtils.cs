@@ -9,7 +9,7 @@ namespace CommonLibrary
   /// <summary>
   /// Хэлпер для обработки строк.
   /// </summary>
-  public static class StringUtils
+  public static class StringCommonLibrary
   {
     #region Константы
     

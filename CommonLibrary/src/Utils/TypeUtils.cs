@@ -3,7 +3,7 @@
   /// <summary>
   /// Вспомогательные функции для работы с типами.
   /// </summary>
-  public static class TypeUtils
+  public static class TypeCommonLibrary
   {
     /// <summary>
     /// Получить квалифицированное имя типа (без сборки).
